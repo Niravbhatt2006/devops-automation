@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    tools{
+        maven 'Maven'
+    }
+    stages{
+        stage('Build Maven'){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Niravbhatt2006/devops-automation']]])
+                sh 'mvn clean install'
+            }
+        }
+        stage('Build docker image'){
+            steps{
+                script{
+                    sh 'docker build -t Docker-nexus-repo/devops-integration:latest .'
+                }
+            }
+        }
+        stage('Push image to Hub'){
+            steps{
+                script{
+                   sh 'docker login -u admin -p admin'
+                   sh 'docker push Docker-nexus-repo/devops-integration:latest'
+                }
+            }
+        }
+     }
+ }    
