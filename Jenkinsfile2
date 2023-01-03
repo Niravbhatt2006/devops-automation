@@ -18,7 +18,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t docker-nexus-repo/devops-integration:latest .'
+                    sh 'docker build -t 54.160.119.190:8083/devops-integration:latest .'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
                 script{
                    // This step should not normally be used in your script. Consult the inline help for details.
                     withDockerRegistry(credentialsId: 'Nexus_Cred', url: 'http://54.160.119.190:8083/repository/docker-nexus-repo/') {
-                        docker.image('docker-nexus-repo/devops-integration:latest').push()     
+                        docker.image('54.160.119.190:8083/devops-integration:latest').push()     
                    }
                 }
             }
