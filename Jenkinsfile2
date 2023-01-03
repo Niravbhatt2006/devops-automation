@@ -26,7 +26,7 @@ pipeline {
             steps{
                 script{
                    sh 'docker login -u admin -p admin'
-                   sh 'docker push Docker-nexus-repo/devops-integration:latest'
+                   sh 'docker push docker-nexus-repo/devops-integration:latest'
                 }
             }
         }
