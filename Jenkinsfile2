@@ -26,7 +26,7 @@ pipeline {
             steps{
                 script{
                    // This step should not normally be used in your script. Consult the inline help for details.
-                    withDockerRegistry(credentialsId: 'Nexus_Cred', url: 'http://54.160.119.190:8081/repository/docker-nexus-repo/') {
+                    withDockerRegistry(credentialsId: 'Nexus_Cred', url: 'http://54.160.119.190:8083/repository/docker-nexus-repo/') {
                         docker.image('docker-nexus-repo/devops-integration:latest').push()     
                    }
                 }
