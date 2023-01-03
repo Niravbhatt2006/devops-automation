@@ -25,8 +25,10 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                   sh 'docker login -u admin -p admin'
-                   sh 'docker push docker-nexus-repo/devops-integration:latest'
+                   // This step should not normally be used in your script. Consult the inline help for details.
+                    withDockerRegistry(credentialsId: 'Nexus_Cred', url: 'http://54.160.119.190:8081/repository/docker-nexus-repo/') {
+                        docker.image('docker-nexus-repo/devops-integration:latest').push()     
+                   }
                 }
             }
         }
